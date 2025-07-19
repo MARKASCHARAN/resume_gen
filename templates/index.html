@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Resume Builder</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Smart Resume Generator</h1>
+        <form method="post" action="/generate">
+            
+            <h2>Contact Details</h2>
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <input type="text" name="city" placeholder="Current City" required>
+            <input type="url" name="github" placeholder="GitHub Profile" required>
+            <input type="url" name="linkedin" placeholder="LinkedIn Profile" required>
+
+            <h2>Professional Summary</h2>
+            <textarea name="objective" rows="4" placeholder="Summarize your career goals and strengths" required></textarea>
+
+            <h2>Education</h2>
+            <div class="education-block">
+                <input name="degree" placeholder="Degree" required>
+                <input name="institute" placeholder="Institute/University" required>
+                <input name="year" placeholder="Year" required>
+                <input name="grade" placeholder="Percentage / CGPA" required>
+            </div>
+            <div class="education-block">
+                <input name="degree" placeholder="Second Degree (optional)">
+                <input name="institute" placeholder="Institute">
+                <input name="year" placeholder="Year">
+                <input name="grade" placeholder="Percentage / CGPA">
+            </div>
+
+            <h2>Technical Skills</h2>
+            <input name="languages" placeholder="Programming Languages (e.g. Python, C)" required>
+            <input name="frontend" placeholder="Frontend/Tools (e.g. React, Metasploit)" required>
+            <input name="backend" placeholder="Backend/DevOps (e.g. FastAPI, Burp Suite)" required>
+            <input name="databases" placeholder="Databases (e.g. MySQL, MongoDB)" required>
+            <input name="cloud" placeholder="Cloud/OS (e.g. AWS, Kali Linux)" required>
+
+            <h2>Achievements <span style="font-weight: normal;">(Optional)</span></h2>
+            <div id="achievement-container">
+                <input name="achievements" placeholder="e.g. Winner at HackXYZ 2024">
+            </div>
+            <button type="button" class="add-btn" onclick="addAchievement()">+ Add More Achievements</button>
+
+            <h2>Projects</h2>
+            <div id="projects-container">
+                <div class="project-block">
+                    <input name="project_name" placeholder="Project Title" required>
+                    <textarea name="project_description" placeholder="Brief Description" required></textarea>
+                    <input name="project_technologies" placeholder="Technologies Used" required>
+                    <input name="project_link" placeholder="Project Link (optional)">
+                </div>
+            </div>
+            <button type="button" class="add-btn" onclick="addProject()">+ Add More Projects</button>
+
+            <h2>Work Experience</h2>
+            <div id="experience-container">
+                <div class="experience-block">
+                    <input name="company" placeholder="Company/Organization" required>
+                    <input name="role" placeholder="Position Held" required>
+                    <input name="duration" placeholder="e.g. Jan 2023 – Apr 2023" required>
+                    <textarea name="responsibilities" rows="4" placeholder="Duties and responsibilities (one per line)" required></textarea>
+                    <input name="technologies" placeholder="Technologies Used" required>
+                </div>
+            </div>
+            <button type="button" class="add-btn" onclick="addExperience()">+ Add More Experience</button>
+
+            <br><br>
+            <button type="submit">Generate PDF</button>
+        </form>
+    </div>
+
+    <script>
+        function addAchievement() {
+            const container = document.getElementById('achievement-container');
+            const input = document.createElement('input');
+            input.name = 'achievements';
+            input.placeholder = 'e.g. Published paper on ML at XYZConf';
+            container.appendChild(input);
+        }
+
+        function addProject() {
+            const container = document.getElementById('projects-container');
+            const block = container.querySelector('.project-block');
+            const newBlock = block.cloneNode(true);
+            newBlock.querySelectorAll('input, textarea').forEach(el => el.value = '');
+            container.appendChild(newBlock);
+        }
+
+        function addExperience() {
+            const container = document.getElementById('experience-container');
+            const block = container.querySelector('.experience-block');
+            const newBlock = block.cloneNode(true);
+            newBlock.querySelectorAll('input, textarea').forEach(el => el.value = '');
+            container.appendChild(newBlock);
+        }
+    </script>
+</body>
+</html>
